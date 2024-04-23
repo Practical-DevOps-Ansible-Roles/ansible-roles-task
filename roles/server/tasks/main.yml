@@ -1,9 +1,12 @@
 ---
+- name: Update apt package cache
+  apt:
+    update_cache: true
+
 - name: Add PHP repository
   ansible.builtin.apt_repository:
     repo: ppa:ondrej/php
     state: present
-    update_cache: true
 
 - name: Install the gpg key for nodejs LTS
   ansible.builtin.apt_key:
