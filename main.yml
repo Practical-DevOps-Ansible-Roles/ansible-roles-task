@@ -1,1 +1,14 @@
 ---
+- name: Setup database
+  hosts: db
+  tasks:
+    - name: Run database playbook
+      include_role:
+        name: database
+
+- name: Setup web server
+  hosts: server
+  tasks:
+    - name: Run web server playbook
+      include_role:
+        name: web-server

@@ -1,0 +1,5 @@
+---
+db_name: 
+db_user: 
+db_pass:
+login_unix_socket: /var/run/postgresql
