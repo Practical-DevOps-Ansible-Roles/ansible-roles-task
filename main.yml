@@ -4,7 +4,7 @@
   tasks:
     - name: Run database playbook
       include_role:
-        name: database
+        name: db
 
 - name: Setup web server
   hosts: server
