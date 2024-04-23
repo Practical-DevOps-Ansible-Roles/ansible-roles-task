@@ -1,19 +1,13 @@
 ---
-# - name: Update apt package cache
-#   apt:
-#     update_cache: true
-#   become: true
-
-# - name: Add PHP repository
-#   ansible.builtin.apt_repository:
-#     repo: ppa:ondrej/php
-#     state: present
+- name: Add PHP repository
+  ansible.builtin.apt_repository:
+    repo: ppa:ondrej/php
+    state: present
 
 - name: Install the gpg key for nodejs LTS
   ansible.builtin.apt_key:
     url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
     state: present
-  become: true
 
 - name: Install the nodejs LTS repos
   ansible.builtin.apt_repository:
@@ -50,7 +44,6 @@
     dest: ./devops_pract
     clone: yes
     update: yes
-  become: false
 
 - name: Copy project to server
   ansible.builtin.copy:

@@ -1,46 +1,41 @@
 ---
-  - name: Install dependencies for PostgreSQL
-    apt:
-      name: "{{ item }}"
-      state: present
-    loop:
+- name: Install dependencies for PostgreSQL
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
     - postgresql
     - postgresql-contrib
     - libpq-dev
     - python3-psycopg2
-    become: true
 
-  - name: Start and enable services
-    ansible.builtin.service:
-      name: postgresql
-      state: started
-      enabled: yes
-    become: true
+- name: Start and enable services
+  ansible.builtin.service:
+    name: postgresql
+    state: started
+    enabled: yes
 
-  - name: Create PostgreSQL database
-    postgresql_db:
-      name: "{{ db_name }}"
-      state: present
-      login_unix_socket: "{{ login_unix_socket }}"
-    become: true
-    become_user: postgres
+- name: Create PostgreSQL database
+  postgresql_db:
+    name: "{{ db_name }}"
+    state: present
+    login_unix_socket: "{{ login_unix_socket }}"
+  become_user: postgres
 
-  - name: Create database user
-    postgresql_user:
-      name: "{{ db_user }}"
-      password: "{{ db_pass }}"
-      state: present
-      login_unix_socket: "{{ login_unix_socket }}"
-    become: true
-    become_user: postgres
+- name: Create database user
+  postgresql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_pass }}"
+    state: present
+    login_unix_socket: "{{ login_unix_socket }}"
+  become_user: postgres
 
-  - name: Grant database user access to database
-    postgresql_privs:
-      type: database
-      db: "{{ db_name }}"
-      roles: "{{ db_user }}"
-      privs: all
-      login_unix_socket: "{{ login_unix_socket }}"
-    become: true
-    become_user: postgres
-    notify: Restart PostgreSQL
+- name: Grant database user access to database
+  postgresql_privs:
+    type: database
+    db: "{{ db_name }}"
+    roles: "{{ db_user }}"
+    privs: all
+    login_unix_socket: "{{ login_unix_socket }}"
+  become_user: postgres
+  notify: Restart PostgreSQL

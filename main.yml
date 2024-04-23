@@ -1,6 +1,7 @@
 ---
 - name: Setup database
   hosts: db
+  become: true
   tasks:
     - name: Run database playbook
       include_role:
@@ -8,6 +9,7 @@
 
 - name: Setup web server
   hosts: server
+  become: true
   tasks:
     - name: Run web server playbook
       include_role:
