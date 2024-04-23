@@ -11,4 +11,4 @@
   tasks:
     - name: Run web server playbook
       include_role:
-        name: web-server
+        name: server
