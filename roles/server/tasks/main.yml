@@ -2,6 +2,7 @@
 - name: Update apt package cache
   apt:
     update_cache: true
+  become: true
 
 - name: Add PHP repository
   ansible.builtin.apt_repository:
@@ -17,7 +18,6 @@
   ansible.builtin.apt_repository:
     repo: "deb https://deb.nodesource.com/node_18.x {{ ansible_distribution_release }} main"
     state: present
-    update_cache: yes
 
 - name: Install Node.js and Apache
   ansible.builtin.apt:
